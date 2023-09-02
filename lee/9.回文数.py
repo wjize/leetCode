@@ -32,6 +32,7 @@ class Solution:
         # 新代码
         # 逻辑: 无变化
         # 优化: 就是简单减少了行数，使用三元表达式解决
+        # Feature #9-1 【回文数】 简化代码
         return str(x) == str(x)[::-1] if x >= 0 else False
 # @lc code=end
 
