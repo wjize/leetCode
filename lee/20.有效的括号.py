@@ -15,6 +15,11 @@ class Solution:
         # Bug #20-2 【有效的括号】用例为"()"时，无法通过
         # 原因：审题有误，传入的参数是一个字符串而非列表。自己做测试时也是使用list传参，所以未发现
         # 修改方法：重构代码
+
+        # Bug #20-3 【有效的括号】当用例为"((("时返回ture,与预期不符，应为false
+        # 原因：如果都为左括号，则不会进入到比较的分支中，也不会输出false。
+        # 修改方法：如果所有括号都匹配，则最后的stack中不应该有任何元素，退出for循环后，再次进行判断输出
+
         base_bracket = {")":"(", "]":"[", "}":"{"}
         stack = []
         if len(s) == 1:
@@ -28,7 +33,11 @@ class Solution:
                 # else:
                     return False
         # return bo
-        return True
+        # return True
+        if len(stack) == 0:
+            return True
+        else:
+            return False
 
 # @lc code=end
 
