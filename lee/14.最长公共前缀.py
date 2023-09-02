@@ -31,6 +31,7 @@ class Solution:
         ' 如果可迭代对象中的至少一个元素为假(False),或者可迭代对象为空,all() 返回 False。
         '''
 
+        # Feature #14-1 【最长公共前缀】代码优化,减少s临时表的使用
         st = ""
         min_len = min(len(s) for s in strs)
         # for i in range(len(strs)):
