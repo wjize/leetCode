@@ -27,15 +27,20 @@ class Solution:
         # Bug #20-5 【有效的括号】当用例为"()"时，返回结果为false，与预期不符
         # 原因：if stack.pop() != base_bracket[s[i]] or len(stack) == 0:该步条件判断先pop，后判断
         # 修改方法：将长度判断先比较，就不会出问题了。
+
+        ''' Feature #20-1 【有效的括号】优化代码
+        ' 1.主要就行简化代码,提高可读性
+        ' 2.就是循环之前的判断其实是不必要的,在后续的循环判断中会处理掉
+        '''
         base_bracket = {")":"(", "]":"[", "}":"{"}
         stack = []
-        if len(s) == 1 or s[0] in [")", "]", "}"]:
-            return False
-        for i in range(len(s)):
-            if s[i] in ["(", "[", "{"]:
-                stack.append(s[i])
-            if s[i] in [")", "]", "}"]:
-                if len(stack) == 0 or stack.pop() != base_bracket[s[i]]:
+        # if len(s) == 1 or s[0] in [")", "]", "}"]:
+        #     return False
+        for char in s:
+            if char in "([{":
+                stack.append(char)
+            if char in ")]}":
+                if not stack or stack.pop() != base_bracket.get(char):
                     # bo = True
                 # else:
                     return False
@@ -45,7 +50,7 @@ class Solution:
         #     return True
         # else:
         #     return False
-        return len(stack) == 0
+        return not stack
 
 # @lc code=end
 
