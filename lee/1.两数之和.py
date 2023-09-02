@@ -15,7 +15,6 @@ class Solution:
         '''
         # 示例
         '''
-        代码：
         fruits = ['apple', 'banana', 'cherry', 'date']
         for index, fruit in enumerate(fruits):
             print(f"Index {index} corresponds to {fruit}")
@@ -37,6 +36,8 @@ class Solution:
         #       检查complement是否在字典中，若不在则将num与索引值加入字典中，进行下一次循环，避免重复遍历。
         #       若complement在字典中，则将两个值的索引返回。
         # 优化: 使用的字典是哈希索引，所以检索速度特别快，并且减少了一次for循环，宏观上看时间复杂度从o(n^2)降到o(n)
+
+        # Feature #1-1 【两数之和】简化代码,时间复杂度降至o(n)
         num_to_index = {}
         for i, num in enumerate(nums):
             complement = target - num
