@@ -20,24 +20,29 @@ class Solution:
         # 原因：如果都为左括号，则不会进入到比较的分支中，也不会输出false。
         # 修改方法：如果所有括号都匹配，则最后的stack中不应该有任何元素，退出for循环后，再次进行判断输出
 
+        # Bug #20-4 【有效的括号】当用例为"){"时，程序出异常
+        # 原因：如果第一个字符是右括号，此时stack中不会有数据，stack.pop()则会出现返回空的错误
+        # 修改方法：增加条件判断,因为如果第一个字符为右括号，那他一定是不匹配的
+
         base_bracket = {")":"(", "]":"[", "}":"{"}
         stack = []
-        if len(s) == 1:
+        if len(s) == 1 or s[0] in [")", "]", "}"]:
             return False
         for i in range(len(s)):
-            if s[i] == "(" or s[i] == "[" or s[i] == "{":
+            if s[i] in ["(", "[", "{"]:
                 stack.append(s[i])
-            if s[i] == ")" or s[i] == "]" or s[i] == "}":
-                if stack.pop() != base_bracket[s[i]]:
+            if s[i] in [")", "]", "}"]:
+                if stack.pop() != base_bracket[s[i]] or len(stack) == 0:
                     # bo = True
                 # else:
                     return False
         # return bo
         # return True
-        if len(stack) == 0:
-            return True
-        else:
-            return False
+        # if len(stack) == 0:
+        #     return True
+        # else:
+        #     return False
+        return len(stack) == 0
 
 # @lc code=end
 
