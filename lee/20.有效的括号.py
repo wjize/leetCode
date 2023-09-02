@@ -24,6 +24,9 @@ class Solution:
         # 原因：如果第一个字符是右括号，此时stack中不会有数据，stack.pop()则会出现返回空的错误
         # 修改方法：增加条件判断,因为如果第一个字符为右括号，那他一定是不匹配的
 
+        # Bug #20-5 【有效的括号】当用例为"()"时，返回结果为false，与预期不符
+        # 原因：if stack.pop() != base_bracket[s[i]] or len(stack) == 0:该步条件判断先pop，后判断
+        # 修改方法：将长度判断先比较，就不会出问题了。
         base_bracket = {")":"(", "]":"[", "}":"{"}
         stack = []
         if len(s) == 1 or s[0] in [")", "]", "}"]:
@@ -32,7 +35,7 @@ class Solution:
             if s[i] in ["(", "[", "{"]:
                 stack.append(s[i])
             if s[i] in [")", "]", "}"]:
-                if stack.pop() != base_bracket[s[i]] or len(stack) == 0:
+                if len(stack) == 0 or stack.pop() != base_bracket[s[i]]:
                     # bo = True
                 # else:
                     return False
